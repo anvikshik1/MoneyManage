@@ -28,6 +28,10 @@ const expensesRouter = require("./routes/expensesRoute");
 app.use("/auth", authRouter);
 app.use("/expenses", expensesRouter);
 
+app.get("/", (req, res) => {
+    res.send("<h1>Welcome </h1>");
+  });
+
 const port = 4000;
 
 app.listen(port,() => {
