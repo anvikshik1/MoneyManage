@@ -32,9 +32,9 @@ const getAllExpenses = async (req, res) => {
     const user_id = req.user._id; 
         try {
           const expenses = await Expense.findById({user_id});
-          res.json({ status: "success", expenses });
+          res.json({ status: "success", expenses: expenses });
         } catch (error) {
-          res.status(500).json({ status: "failed", error: 'An error occurred while querying expenses' });
+          res.status(500).json({ status:"failed", error: 'An error occurred while querying expenses' });
         }
           
             
