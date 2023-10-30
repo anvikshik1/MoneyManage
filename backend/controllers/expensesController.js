@@ -18,7 +18,7 @@ const addExpense = async (req, res) => {
             spend_for: req.body.spend_for,
             spend_amount: req.body.spend_amount,
             date_time: currentDate,
-            user_id: req.body.user_id,
+            user_id: req.user._id,
         });
         await newExpense.save();
         res.status(201).json({ status: "success", message: "Expense added successfully" });

@@ -57,7 +57,7 @@ const login = async (req, res) => {
             expiresIn: `${refreshTokenExp}`,
         });
 
-        res.status(200).json({ status: "success", message: 'Login successful', accessToken: accessToken, refreshToken: refreshToken })
+        res.status(200).json({ status: "success", message: 'Login successful', accessToken: accessToken, refreshToken: refreshToken})
     } catch (error) {
         console.log(error);
         res.status(500).json({ status: "failed", message: 'Error logging in' });
