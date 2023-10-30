@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getLocalData } from "../../utils/ReuseLogic";
+import { mainApi } from "../../utils/constant";
+
 
 
 
@@ -7,7 +9,7 @@ import { getLocalData } from "../../utils/ReuseLogic";
 export const AddExpenseData = createAsyncThunk("user/addexpenses", async(regData)=>{
     return getLocalData("USER_INFO").then(async (res) => {
     try{
-       const responce = await fetch(`https://money-manage-six.vercel.app/expenses/add-expenses`, {
+       const responce = await fetch(`${mainApi.baseUrl}expenses/add-expenses`, {
             method : 'POST',
             headers:{
                 'Content-Type': 'application/json',
@@ -27,7 +29,7 @@ export const AddExpenseData = createAsyncThunk("user/addexpenses", async(regData
 export const GetExpenseData = createAsyncThunk("user/getexpenses", async(regData)=>{
     return getLocalData("USER_INFO").then(async (res) => {
     try{
-       const responce = await fetch(`https://money-manage-six.vercel.app/expenses/filter-expenses`, {
+       const responce = await fetch(`${mainApi.baseUrl}expenses/filter-expenses`, {
             method : 'POST',
             headers:{
                 'Content-Type': 'application/json',
@@ -67,6 +69,7 @@ export const HomeData = createSlice({
             state.error   = false;
         })
 
+        
         builder.addCase(GetExpenseData.pending, (state) => {
             state.loading  =  true;
         })

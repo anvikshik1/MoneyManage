@@ -28,6 +28,18 @@ const addExpense = async (req, res) => {
     }
 };
 
+const getAllExpenses = async (req, res) => {
+    const user_id = req.user._id; 
+        try {
+          const expenses = await Expense.findById(user_id);
+          res.json({ status: "success", expenses });
+        } catch (error) {
+          res.status(500).json({ status: "failed", error: 'An error occurred while querying expenses' });
+        }
+          
+            
+};
+
 const getExpensesByDate = async (req, res) => {
     const user_id = req.user._id;
     const date = new Date(req.body.date);
@@ -150,5 +162,6 @@ module.exports = {
     addExpense,
     getExpensesByDate,
     getExpensesByMonth,
-    getExpnsesBeetweenDateRange
+    getExpnsesBeetweenDateRange,
+    getAllExpenses
 };

@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { mainApi } from "../../utils/constant";
 
 export const registrationData = createAsyncThunk("user/register", async(regData)=>{
     try{
-       const responce = await fetch(`https://money-manage-six.vercel.app/auth/register`, {
+       const responce = await fetch(`${mainApi.baseUrl}/auth/register`, {
             method : 'POST',
             headers:{
                 'Content-Type': 'application/json'
@@ -19,23 +20,7 @@ export const registrationData = createAsyncThunk("user/register", async(regData)
 
 export const loginData = createAsyncThunk("user/register", async(regData)=>{
     try{
-       const responce = await fetch(`https://money-manage-six.vercel.app/auth/login`, {
-            method : 'POST',
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            body : JSON.stringify(regData)
-        });
-        const result = await responce.json();
-        return result;
-    }
-    catch(e){
-       console.log(e);
-    }
-})
-export const refreshData = createAsyncThunk("user/register", async(regData)=>{
-    try{
-       const responce = await fetch(`https://money-manage-six.vercel.app/auth/refresh`, {
+       const responce = await fetch(`${mainApi.baseUrl}auth/login`, {
             method : 'POST',
             headers:{
                 'Content-Type': 'application/json'
@@ -56,7 +41,6 @@ export const regSlice = createSlice({
     initialState : {
         registration : [],
         login : [],
-        refresh : [],
         loading     : false,
         error       : false,
     },
@@ -86,17 +70,7 @@ export const regSlice = createSlice({
             state.error   = false;
         })
 
-        builder.addCase(refreshData.pending, (state) => {
-            state.loading  =  true;
-        })
-        builder.addCase(refreshData.fulfilled, (state, action) => {
-            state.loading       = false,
-            state.refresh  = action.payload;
-        })
-        builder.addCase(refreshData.rejected, (state) => {
-            state.loading = false;
-            state.error   = false;
-        })
+     
     }
 
 })

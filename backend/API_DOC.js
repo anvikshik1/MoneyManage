@@ -3,9 +3,8 @@
 // http://192.168.0.114:4000/auth/login
 // {
 //   "mobile_no": 9637199927,
-//     "password": "screened",
+//   "password": "screened",
 // }
-
 
 // Registration API
 
@@ -20,7 +19,6 @@
 // {
 //   "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTFhOGE2NjYzNmQ3MGE3MTNjYmRkZDkiLCJpYXQiOjE2OTYyNDQ2OTMsImV4cCI6MTcwMjI5MjY5M30.7B06353ew1mWCHYxDVnofc3ndkq5OkR0T9wNz1ZoWcM"
 // }
-
 
 // Add Expenses
 // http://192.168.0.114:4000/expenses/add-expenses
