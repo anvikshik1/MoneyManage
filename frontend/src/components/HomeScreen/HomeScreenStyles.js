@@ -1,0 +1,93 @@
+import { View, Text ,Dimensions, StyleSheet} from 'react-native';
+
+export const styles = StyleSheet.create({
+    header:{
+        alignItems:'center',
+        justifyContent:'flex-end',
+        flexDirection:'row',
+        paddingVertical:5
+    },
+    ProfileImg:{
+        width:40,
+        height:40,
+        borderRadius:50
+    },
+    container:{
+        alignItems:'center',
+    },
+    moneyContainer:{
+        alignItems:'center',
+        marginTop:2,
+        justifyContent:'space-between',
+        flexDirection:'row',
+        flexWrap:'wrap'
+    },
+    button:{
+        backgroundColor:'#133863',
+        height:45,
+        alignItems:'center',
+        justifyContent:'center',
+        borderRadius:10,
+        width:Dimensions.get('window').width/2.4,
+        alignItems:'center',
+        marginBottom:20,
+        shadowColor:"#236AB9",
+        shadowOffset:{
+            width:0,
+            height:10
+        },
+        shadowOpacity:0.25,
+        shadowRadius:3.5,
+        elevation:5
+    },
+    money:{
+        color:'#fff',
+        fontFamily:"DotsAllForNow",
+        fontSize:15,
+    },
+
+    inputAddedExpenses:{
+        borderWidth:2,
+        borderColor:'#133863',
+        borderRadius:10,
+        textAlignVertical:'top',
+        height:150,
+        padding:9,
+        color:"#091D34",
+        width:Dimensions.get('screen').width/2.4,
+        alignSelf:'center',
+        fontSize:50,
+        textAlignVertical:'center'
+    },
+
+    buttonsContainer:{
+        flexDirection:'row',
+        marginTop:15,
+        justifyContent:'space-between',
+    },
+    clearButton:{
+        width: Dimensions.get('window').width/3.5,
+        paddingVertical:10,
+        borderRadius:10,
+        alignItems:'center',
+        borderWidth:2,
+        borderColor:"#133863"
+    },
+    sendButton:{
+        width: Dimensions.get('window').width/3.5,
+        paddingVertical:10,
+        borderRadius:10,
+        alignItems:'center',
+        backgroundColor:'#133863',
+        borderWidth:2,
+        borderColor:"#133863"
+    },
+    clearButtonsText:{
+        color:'#133863',
+        fontFamily:"DotsAllForNow",
+    },
+    sendButtonsText:{
+        color:'#fff',
+        fontFamily:"DotsAllForNow",
+    },
+})

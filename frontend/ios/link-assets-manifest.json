@@ -1,0 +1,57 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/BPdots.otf",
+      "sha1": "db151601672545fa0ab8833eb9414d9ca3a1b20d"
+    },
+    {
+      "path": "src/assets/fonts/BPdotsBold.otf",
+      "sha1": "54c0b470a87584f2213e45a9c69d5ad9ada34c93"
+    },
+    {
+      "path": "src/assets/fonts/BPdotsCondensed.ttf",
+      "sha1": "fe240ab08d809d77fe9227311b08aada55282a9c"
+    },
+    {
+      "path": "src/assets/fonts/BPdotsLight.otf",
+      "sha1": "ea9603b18afd67451e2a86b061d03ce90f56d5e0"
+    },
+    {
+      "path": "src/assets/fonts/BPdotsUnicase.otf",
+      "sha1": "7fcad627e8d9c7f00c2677a88e7cd61c1d31487f"
+    },
+    {
+      "path": "src/assets/fonts/BPdotsUnicaseBold.otf",
+      "sha1": "c11ec76e195aec2f65fa820475bbd5524746dc95"
+    },
+    {
+      "path": "src/assets/fonts/BPdotsUnicaseLight.otf",
+      "sha1": "0e4714972c62952b50bf45fb82a4e1fac100bccc"
+    },
+    {
+      "path": "src/assets/fonts/dotness.ttf",
+      "sha1": "886f56094b9ccd08076e2fbe37a495b51cd54cd4"
+    },
+    {
+      "path": "src/assets/fonts/DotsAllForNow.ttf",
+      "sha1": "838e5b5c6ef4135d151db9e147b87596e42ec26a"
+    },
+    {
+      "path": "src/assets/fonts/NationalFirstFontDotted.ttf",
+      "sha1": "53bcb8b4b002f4a8d56a0e3b38e9dd9ff04f5ffe"
+    },
+    {
+      "path": "src/assets/fonts/RepetitionScrolling.ttf",
+      "sha1": "f1aecda03b9e99bb046d5d26e38a531e7a54c605"
+    },
+    {
+      "path": "src/assets/fonts/scoreboard.PNG",
+      "sha1": "f58d60b0a91cf77aec6b8651424dfac6ca5dbab5"
+    },
+    {
+      "path": "src/assets/fonts/scoreboard.ttf",
+      "sha1": "52f57f6705a7698af74524080f3989263a6e6dbc"
+    }
+  ]
+}
