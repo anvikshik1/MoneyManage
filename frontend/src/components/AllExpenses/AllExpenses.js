@@ -1,11 +1,12 @@
 import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState,useRef } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Container from '../../screens/container/Container'
 import { GlobalStyles } from '../../utils/GlobalStyleSheet'
 import { styles } from './AllExpensesStyles'
 import { Icon } from '../../utils/ReuseLogic'
 import ListModal from './ListModal'
+useDispatch
 // import { addExpense } from '../HomeScreen/HomeSclice';
 
 const AllExpenses = ({navigation}) => {
@@ -13,9 +14,15 @@ const AllExpenses = ({navigation}) => {
   const [expenseData,setExpenseData ] = useState(result)
   const [listModal,setListModal ] = useState(false);
   const [modalView,setModalView ] = useState(false);
+  const dispatch = useDispatch();
+
+  const getAllExpenses = () => {
+    
+  }
 
   useEffect(() => {
     navigation.setOptions({ title: 'All Expenses'});
+    getAllExpenses()
   },[])
  
   const total = expenseData?.map((data) => data?.money).reduce((all, a) => all + a, 0);

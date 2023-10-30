@@ -14,12 +14,13 @@ import { useDispatch } from 'react-redux';
     const handleAdd = async () =>{
       if(description){
         const data = {spend_amount:expenses,spend_for:description};
-        console.log("data",data);
-        const reasult = await dispatch(AddExpenseData(data));
-        console.log("reasult",reasult);
-        // navigation.navigate('AllExpenses');
-        // setModalView(false);
-        // setDescription(null);
+        const result = await dispatch(AddExpenseData(data));
+        console.log("result",result?.payload);
+        if(result?.payload?.status === "success"){
+          navigation.navigate('AllExpenses');
+          setModalView(false);
+          setDescription(null);
+        }
       }
     }
     const onType = (text) =>{

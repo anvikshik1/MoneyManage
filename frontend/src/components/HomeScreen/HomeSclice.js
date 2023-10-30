@@ -4,16 +4,34 @@ import { getLocalData } from "../../utils/ReuseLogic";
 
 
 
-export const AddExpenseData = createAsyncThunk("user/register", async(regData)=>{
-    getLocalData("USER_INFO").then(async (res) => {
-        console.log("accessToken",res?.data?.accessToken);
-    
+export const AddExpenseData = createAsyncThunk("user/addexpenses", async(regData)=>{
+    return getLocalData("USER_INFO").then(async (res) => {
     try{
        const responce = await fetch(`https://money-manage-six.vercel.app/expenses/add-expenses`, {
             method : 'POST',
             headers:{
                 'Content-Type': 'application/json',
-                'authorization': res?.data?.accessToken
+                'authorization': `Bearer ${res?.data?.accessToken}`
+            },
+            body : JSON.stringify(regData)
+        });
+        const result = await responce.json();
+        return result
+    }
+    catch(e){
+       console.log(e);
+    }
+})
+});
+
+export const GetExpenseData = createAsyncThunk("user/getexpenses", async(regData)=>{
+    return getLocalData("USER_INFO").then(async (res) => {
+    try{
+       const responce = await fetch(`https://money-manage-six.vercel.app/expenses/filter-expenses`, {
+            method : 'POST',
+            headers:{
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${res?.data?.accessToken}`
             },
             body : JSON.stringify(regData)
         });
@@ -30,31 +48,38 @@ export const AddExpenseData = createAsyncThunk("user/register", async(regData)=>
 export const HomeData = createSlice({
     name : "homeScreen",
     initialState : {
-        addExpenseData : [],
+        addExpense : [],
+        getExpense : [],
+        loading     : false,
+        error       : false,
     },
-    // reducers : {
-    //     addExpense : (state,action) => {
-    //         state.addExpenseData = [...state.addExpenseData, action.payload];
-    //     }
-    // },
 
     extraReducers : builder => {
         builder.addCase(AddExpenseData.pending, (state) => {
-            state.loading       =  true;
+            state.loading  =  true;
         })
         builder.addCase(AddExpenseData.fulfilled, (state, action) => {
-            state.loading       = false,
-            state.addExpenseData  = action.payload;
+            state.loading     = false,
+            state.addExpense  = action.payload;
         })
         builder.addCase(AddExpenseData.rejected, (state) => {
             state.loading = false;
-            state.error = false
+            state.error   = false;
+        })
+
+        builder.addCase(GetExpenseData.pending, (state) => {
+            state.loading  =  true;
+        })
+        builder.addCase(GetExpenseData.fulfilled, (state, action) => {
+            state.loading     = false,
+            state.getExpense  = action.payload;
+        })
+        builder.addCase(GetExpenseData.rejected, (state) => {
+            state.loading = false;
+            state.error   = false;
         })
     }
 
 })
-
-
-export const {addExpense} = HomeData.actions;
 
 export default HomeData.reducer;

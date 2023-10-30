@@ -29,7 +29,7 @@ const addExpense = async (req, res) => {
 };
 
 const getExpensesByDate = async (req, res) => {
-    const user_id = req.body.user_id;
+    const user_id = req.user._id;
     const date = new Date(req.body.date);
 
     const query = {
@@ -52,7 +52,7 @@ const getExpensesByDate = async (req, res) => {
 };
 
 const getExpensesByMonth = async (req, res) => {
-    const user_id = req.body.user_id;
+    const user_id = req.user._id;
     const filterYear = req.body.year;
     const filterMonth = req.body.month;
   
@@ -122,7 +122,7 @@ const getExpensesByMonth = async (req, res) => {
   
 
 const getExpnsesBeetweenDateRange = async (req, res) => {
-    const user_id = req.body.user_id;
+    const user_id = req.user._id;
     const startDate = new Date(req.body.startDate);
     const endDate = new Date(req.body.endDate);
     endDate.setDate(endDate.getDate() + 1);
