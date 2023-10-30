@@ -31,13 +31,11 @@ const addExpense = async (req, res) => {
 const getAllExpenses = async (req, res) => {
     const user_id = req.user._id; 
         try {
-          const expenses = await Expense.findById({user_id});
+          const expenses = await Expense.find({user_id:user_id});
           res.json({ status: "success", expenses: expenses });
         } catch (error) {
           res.status(500).json({ status:"failed", error: 'An error occurred while querying expenses' });
         }
-          
-            
 };
 
 const getExpensesByDate = async (req, res) => {
