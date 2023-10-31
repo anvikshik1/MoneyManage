@@ -182,6 +182,16 @@ const editExpenses = async (req, res) => {
       }
 };
 
+const deleteExpenses = async (req, res) => {
+  const { id } = req.params; 
+      try {
+        const expenses =  await Expense.findByIdAndDelete(id);
+        res.json({ status: "success", expenses: expenses });
+      } catch (error) {
+        res.status(500).json({ status:"failed", error: 'An error occurred while querying expenses' });
+      }
+};
+
 module.exports = {
     welcome,
     addExpense,
@@ -190,5 +200,6 @@ module.exports = {
     getExpnsesBeetweenDateRange,
     getAllExpenses,
     getExpenses,
-    editExpenses
+    editExpenses,
+    deleteExpenses
 };
