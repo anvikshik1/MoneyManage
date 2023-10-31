@@ -165,6 +165,23 @@ const getExpenses = async (req, res) => {
       }
 };
 
+const editExpenses = async (req, res) => {
+  const { id } = req.params; 
+      try {
+        const expenses =  await commentsSchema.findByIdAndUpdate(
+          id,
+          {
+            spend_for: req.body.spend_for,
+            spend_amount: req.body.spend_amount
+          },
+          { new: true }
+        );
+        res.json({ status: "success", expenses: expenses });
+      } catch (error) {
+        res.status(500).json({ status:"failed", error: 'An error occurred while querying expenses' });
+      }
+};
+
 module.exports = {
     welcome,
     addExpense,
@@ -172,5 +189,6 @@ module.exports = {
     getExpensesByMonth,
     getExpnsesBeetweenDateRange,
     getAllExpenses,
-    getExpenses
+    getExpenses,
+    editExpenses
 };

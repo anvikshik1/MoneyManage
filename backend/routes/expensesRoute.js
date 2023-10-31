@@ -9,5 +9,6 @@ router.post("/filter-expenses", verifyBearerToken, expensesController.getExpense
 router.post("/filter-expenses-by-month", verifyBearerToken, expensesController.getExpensesByMonth);
 router.post("/filter-expenses-by-date-range", verifyBearerToken, expensesController.getExpnsesBeetweenDateRange);
 router.get("/all-expenses/:id", verifyBearerToken, expensesController.getExpenses);
+router.put("/all-expenses/:id", verifyBearerToken, expensesController.editExpenses);
 
 module.exports = router;
