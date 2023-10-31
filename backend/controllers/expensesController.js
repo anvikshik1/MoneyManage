@@ -168,7 +168,7 @@ const getExpenses = async (req, res) => {
 const editExpenses = async (req, res) => {
   const { id } = req.params; 
       try {
-        const expenses =  await commentsSchema.findByIdAndUpdate(
+        const expenses =  await Expense.findByIdAndUpdate(
           id,
           {
             spend_for: req.body.spend_for,
