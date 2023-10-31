@@ -155,11 +155,22 @@ const getExpnsesBeetweenDateRange = async (req, res) => {
         });
 };
 
+const getExpenses = async (req, res) => {
+  const { id } = req.params; 
+      try {
+        const expenses = await Expense.find({_id:id});
+        res.json({ status: "success", expenses: expenses });
+      } catch (error) {
+        res.status(500).json({ status:"failed", error: 'An error occurred while querying expenses' });
+      }
+};
+
 module.exports = {
     welcome,
     addExpense,
     getExpensesByDate,
     getExpensesByMonth,
     getExpnsesBeetweenDateRange,
-    getAllExpenses
+    getAllExpenses,
+    getExpenses
 };

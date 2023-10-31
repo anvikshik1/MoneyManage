@@ -8,5 +8,6 @@ router.get("/all-expenses", verifyBearerToken, expensesController.getAllExpenses
 router.post("/filter-expenses", verifyBearerToken, expensesController.getExpensesByDate);
 router.post("/filter-expenses-by-month", verifyBearerToken, expensesController.getExpensesByMonth);
 router.post("/filter-expenses-by-date-range", verifyBearerToken, expensesController.getExpnsesBeetweenDateRange);
+router.get("/all-expenses/:id", verifyBearerToken, expensesController.getExpenses);
 
 module.exports = router;

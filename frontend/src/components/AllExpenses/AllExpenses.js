@@ -1,22 +1,28 @@
-import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native'
+import { View, Text, SafeAreaView, TouchableOpacity ,ScrollView} from 'react-native'
 import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Container from '../../screens/container/Container'
 import { GlobalStyles } from '../../utils/GlobalStyleSheet'
 import { styles } from './AllExpensesStyles'
-import { Icon } from '../../utils/ReuseLogic'
+import { Icon, getLocalData } from '../../utils/ReuseLogic'
 import ListModal from './ListModal'
+import { GetExpenseData } from '../HomeScreen/HomeSclice'
 // import { addExpense } from '../HomeScreen/HomeSclice';
 
+
 const AllExpenses = ({navigation}) => {
-  const result = useSelector((state) => state?.expenseData?.addExpenseData);
-  const [expenseData,setExpenseData ] = useState(result)
+  // const result = useSelector((state) => state?.expenseData?.addExpenseData);
+
+  // const [expenseData,setExpenseData ] = useState(result)
   const [listModal,setListModal] = useState(false);
   const [modalView,setModalView] = useState(false);
+  const [expenseAllData,setExpenseAllData] = useState([]);
   const dispatch = useDispatch();
 
-  const getAllExpenses = () => {
-    
+  const getAllExpenses = async () => {
+      const result = await dispatch(GetExpenseData());
+      console.log("payload",result?.payload);
+      setExpenseAllData(result?.payload?.expenses)
   }
 
   useEffect(() => {
@@ -24,11 +30,12 @@ const AllExpenses = ({navigation}) => {
     getAllExpenses();
   },[])
  
-  const total = expenseData?.map((data) => data?.money).reduce((all, a) => all + a, 0);
+  const total = expenseAllData?.map((data) => data?.money).reduce((all, a) => all + a, 0);
 
-  const handleDelete = (index) =>{
-    const deleted = expenseData.filter((data,ind) => ind !== index);
-    setExpenseData(deleted);
+  const handleDelete = (id) =>{
+    console.log(id);
+    const deleted = expenseAllData.filter((data,ind) => data?._id !== id);
+    setExpenseAllData(deleted);
   }
 
   const handlelistModal = () =>{
@@ -52,22 +59,24 @@ const AllExpenses = ({navigation}) => {
         <TouchableOpacity style={GlobalStyles.customButton} onPress={()=> navigation.navigate("HomeScreen")}>
           <Text style={GlobalStyles.customButtonText}> add one more</Text>
         </TouchableOpacity>
-        {expenseData?.map((expenses,index) =>(
+        <ScrollView style={{marginBottom:200}} showsVerticalScrollIndicator={false}>
+        {expenseAllData?.map((expenses,index) =>(
           <View style={styles.expensesList} key={index}>
-            <Text style={styles.allExpenses}>{expenses?.description}</Text>
+            <Text style={styles.allExpenses}>{expenses?.spend_for}</Text>
             <View style={styles.allMoneyBox}>
-              <Text style={styles.allMoney}>{expenses?.money}₹</Text>
+              <Text style={styles.allMoney}>{expenses?.spend_amount}₹</Text>
               <View style={styles.deleteBox}>
                 <TouchableOpacity style={styles.editIcon}>
                   {Icon("Feather", "edit", 25, "#609CE1")}
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => handleDelete(index)}>
+                <TouchableOpacity onPress={() => handleDelete(expenses?._id)}>
                   {Icon("AntDesign", "delete", 25, "#ff0000")}
                 </TouchableOpacity>
               </View>
             </View>
           </View>
         ))}
+        </ScrollView>
         {total !== 0 && <View style={styles.totalBox}>
           <Text style={styles.totalCount}>Total : {total}₹ </Text>
         </View>}

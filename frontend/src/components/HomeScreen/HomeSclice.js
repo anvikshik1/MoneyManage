@@ -3,9 +3,6 @@ import { getLocalData } from "../../utils/ReuseLogic";
 import { mainApi } from "../../utils/constant";
 
 
-
-
-
 export const AddExpenseData = createAsyncThunk("user/addexpenses", async(regData)=>{
     return getLocalData("USER_INFO").then(async (res) => {
     try{
@@ -26,19 +23,19 @@ export const AddExpenseData = createAsyncThunk("user/addexpenses", async(regData
 })
 });
 
-export const GetExpenseData = createAsyncThunk("user/getexpenses", async(regData)=>{
+export const GetExpenseData = createAsyncThunk("user/getexpenses", async(token)=>{
     return getLocalData("USER_INFO").then(async (res) => {
     try{
-       const responce = await fetch(`${mainApi.baseUrl}expenses/filter-expenses`, {
-            method : 'POST',
-            headers:{
-                'Content-Type': 'application/json',
+        console.log("token",token);
+        const responce = await fetch(`${mainApi.baseUrl}expenses/all-expenses`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
                 'authorization': `Bearer ${res?.data?.accessToken}`
             },
-            body : JSON.stringify(regData)
         });
         const result = await responce.json();
-        return result
+        return result;
     }
     catch(e){
        console.log(e);
@@ -82,7 +79,6 @@ export const HomeData = createSlice({
             state.error   = false;
         })
     }
-
 })
 
 export default HomeData.reducer;
