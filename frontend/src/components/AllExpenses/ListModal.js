@@ -3,14 +3,14 @@ import React, {useState} from 'react';
 
 const ListModal = () => {
   return (
-        <View style={styles.modalView}>
-            <TouchableOpacity style={styles.weekly}>
-                <Text style={styles.textNormal}>weekly</Text>
-            </TouchableOpacity>
-            <TouchableOpacity >
-                <Text style={styles.textNormal}>monthly</Text>
-            </TouchableOpacity>
-        </View>
+    <View style={styles.modalView}>
+        <TouchableOpacity style={styles.weekly}>
+            <Text style={styles.textNormal}>weekly</Text>
+        </TouchableOpacity>
+        <TouchableOpacity >
+            <Text style={styles.textNormal}>monthly</Text>
+        </TouchableOpacity>
+    </View>
   )
 }
 

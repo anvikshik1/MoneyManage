@@ -9,7 +9,6 @@ export const styles = StyleSheet.create({
         justifyContent:'space-between',
         flexDirection:'row',
         alignItems:'center',
-        
     },
     header:{
         alignItems:'center',
@@ -43,12 +42,12 @@ export const styles = StyleSheet.create({
     },
     totalBox:{
         flexDirection:'row',
-        paddingVertical:10
+        paddingVertical:10,
+        marginBottom:200,
     },
     totalCount:{
         fontFamily:'DotsAllForNow',
         fontSize:20,
         color:'#091D34'
     }
-
 })

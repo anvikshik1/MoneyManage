@@ -159,9 +159,9 @@ const getExpenses = async (req, res) => {
   const { id } = req.params; 
       try {
         const expenses = await Expense.findById(id);
-        res.json({ status: "success", expenses: expenses });
+        res.json({status: "success", expenses: expenses});
       } catch (error) {
-        res.status(500).json({ status:"failed", error: 'An error occurred while querying expenses' });
+        res.status(500).json({ status:"failed", error: 'An error occurred while querying expenses'});
       }
 };
 

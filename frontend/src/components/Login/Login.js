@@ -23,7 +23,6 @@ const Login = ({navigation}) => {
     const postData = {mobile_no:username, password:password};
     console.log(postData);
     const result =  await dispatch(loginData(postData));
-    console.log("result",result?.payload);
     if(result?.payload?.status === "success"){
       storeData('USER_INFO',JSON.stringify({data: result?.payload}))
       navigation.navigate("HomeScreen");
@@ -37,9 +36,7 @@ const Login = ({navigation}) => {
   
   return (
     <SafeAreaView style={GlobalStyles.safeAreaView}>
-      
       <View style={{justifyContent:'center',alignItems:'center',padding:15,flex:1}}>
-        
           <View style={styles.inputFieldBox}>
               <TextInput 
                 mode="outlined"

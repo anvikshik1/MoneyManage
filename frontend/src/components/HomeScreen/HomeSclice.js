@@ -23,10 +23,9 @@ export const AddExpenseData = createAsyncThunk("user/addexpenses", async(regData
 })
 });
 
-export const GetExpenseData = createAsyncThunk("user/getexpenses", async(token)=>{
+export const GetExpenseData = createAsyncThunk("user/getexpenses", async()=>{
     return getLocalData("USER_INFO").then(async (res) => {
     try{
-        console.log("token",token);
         const responce = await fetch(`${mainApi.baseUrl}expenses/all-expenses`, {
             method: "GET",
             headers: {
@@ -43,12 +42,76 @@ export const GetExpenseData = createAsyncThunk("user/getexpenses", async(token)=
 })
 })
 
+export const DeleteExpenseData = createAsyncThunk("user/deleteExpense", async(id)=>{
+    return getLocalData("USER_INFO").then(async (res) => {
+    try{
+        const responce = await fetch(`${mainApi.baseUrl}expenses/all-expenses/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                'authorization': `Bearer ${res?.data?.accessToken}`
+            },
+        });
+        const result = await responce.json();
+        return result;
+    }
+    catch(e){
+       console.log(e);
+    }
+})
+})
+
+export const ByIdExpenseData = createAsyncThunk("user/byIdExpense", async(id)=>{
+    return getLocalData("USER_INFO").then(async (res) => {
+    try{
+        const responce = await fetch(`${mainApi.baseUrl}expenses/all-expenses/${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                'authorization': `Bearer ${res?.data?.accessToken}`
+            },
+        });
+        const result = await responce.json();
+        return result;
+    }
+    catch(e){
+       console.log(e);
+    }
+})
+})
+
+export const EditExpenseData = createAsyncThunk("user/editExpense", async(regData)=>{
+    return getLocalData("USER_INFO").then(async (res) => {
+    try{
+        const responce = await fetch(`${mainApi.baseUrl}expenses/all-expenses/${regData.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                'authorization': `Bearer ${res?.data?.accessToken}`
+            },
+            body : JSON.stringify({
+                spend_amount: regData.spend_amount,
+                spend_for: regData.spend_for
+            })
+        });
+        const result = await responce.json();
+        return result;
+    }
+    catch(e){
+       console.log(e);
+    }
+})
+})
+
 
 export const HomeData = createSlice({
     name : "homeScreen",
     initialState : {
         addExpense : [],
         getExpense : [],
+        deleteExpense : [],
+        byIdExpense : [],
+        editExpense : [],
         loading     : false,
         error       : false,
     },
@@ -75,6 +138,43 @@ export const HomeData = createSlice({
             state.getExpense  = action.payload;
         })
         builder.addCase(GetExpenseData.rejected, (state) => {
+            state.loading = false;
+            state.error   = false;
+        })
+
+
+        builder.addCase(DeleteExpenseData.pending, (state) => {
+            state.loading  =  true;
+        })
+        builder.addCase(DeleteExpenseData.fulfilled, (state, action) => {
+            state.loading     = false,
+            state.deleteExpense  = action.payload;
+        })
+        builder.addCase(DeleteExpenseData.rejected, (state) => {
+            state.loading = false;
+            state.error   = false;
+        })
+
+        builder.addCase(ByIdExpenseData.pending, (state) => {
+            state.loading  =  true;
+        })
+        builder.addCase(ByIdExpenseData.fulfilled, (state, action) => {
+            state.loading     = false,
+            state.byIdExpense  = action.payload;
+        })
+        builder.addCase(ByIdExpenseData.rejected, (state) => {
+            state.loading = false;
+            state.error   = false;
+        })
+
+        builder.addCase(EditExpenseData.pending, (state) => {
+            state.loading  =  true;
+        })
+        builder.addCase(EditExpenseData.fulfilled, (state, action) => {
+            state.loading     = false,
+            state.editExpense  = action.payload;
+        })
+        builder.addCase(EditExpenseData.rejected, (state) => {
             state.loading = false;
             state.error   = false;
         })
