@@ -23,9 +23,11 @@ import { useDispatch } from 'react-redux';
         }
       }
     }
+
     const onType = (text) =>{
       setDescription(text)
     }
+
     return (
         <Modal
             animationType="fade"

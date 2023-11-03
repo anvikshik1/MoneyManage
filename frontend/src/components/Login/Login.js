@@ -3,9 +3,9 @@ import React,{useState} from 'react';
 import { GlobalStyles } from '../../utils/GlobalStyleSheet';
 import { styles } from './LoginStyles';
 import { TextInput } from 'react-native-paper';
-import { loginData, refreshData } from '../Registration/registrationSlice';
+import { loginData } from '../Registration/registrationSlice';
 import { useDispatch } from 'react-redux';
-import { getLocalData, storeData } from '../../utils/ReuseLogic';
+import { storeData } from '../../utils/ReuseLogic';
 
 const Login = ({navigation}) => {
   const [showeye, setshoweye] = useState(true);
@@ -30,9 +30,6 @@ const Login = ({navigation}) => {
       setWrongCred(true)
     }
   }
-
-  
-
   
   return (
     <SafeAreaView style={GlobalStyles.safeAreaView}>
@@ -56,9 +53,9 @@ const Login = ({navigation}) => {
                 right={<TextInput.Icon icon={showeye? "eye-off":"eye"}  onPress={() => handleIcon()}/>}
               />
               {wrongCred && <Text style={styles.errorMsg}>Incorrect email or password.</Text>}
-              <TouchableOpacity style={styles.forgotPassword} onPress={() =>  navigation.navigate("ForgotPassword")}>
+              {/* <TouchableOpacity style={styles.forgotPassword} onPress={() =>  navigation.navigate("ForgotPassword")}>
                 <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
           </View>
           <TouchableOpacity onPress={() => handleLogin()} style={GlobalStyles.customButton}>
             <Text style={GlobalStyles.customButtonText}>Login</Text>
@@ -67,11 +64,11 @@ const Login = ({navigation}) => {
             <Text style={styles.orDeviderText}>Or</Text>
           </View>
           {/* <TouchableOpacity style={styles.fb_login}>
-            <Text style={GlobalStyles.customButtonText}>Facebook</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.g_login}> 
-            <Text style={GlobalStyles.customButtonText}>Google</Text>
-          </TouchableOpacity> */}
+                <Text style={GlobalStyles.customButtonText}>Facebook</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.g_login}>
+                <Text style={GlobalStyles.customButtonText}>Google</Text>
+              </TouchableOpacity> */}
           <View style={styles.signUpBox}>
             <Text style={styles.newToSignUp}>New to this app?</Text>
             <TouchableOpacity onPress={() =>  navigation.navigate("Registration")}>

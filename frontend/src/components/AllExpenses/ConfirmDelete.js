@@ -27,7 +27,7 @@ import { DeleteExpenseData } from '../HomeScreen/HomeSclice';
                 <View style={styles.buttonsContainer}>
                   <TouchableOpacity 
                     style={GlobalStyles.leftButton} 
-                    onPress={() =>{setModalView(false), setDescription(null)}}>
+                    onPress={() =>{setModalView(false)}}>
                     <Text style={GlobalStyles.leftButtonsText}>Cancel</Text>
                   </TouchableOpacity>
                   <TouchableOpacity 

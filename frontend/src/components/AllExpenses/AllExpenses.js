@@ -9,7 +9,10 @@ import ListModal from './ListModal'
 import { DeleteExpenseData, GetExpenseData } from '../HomeScreen/HomeSclice'
 import ConfirmDelete from './ConfirmDelete'
 import EditModal from './EditModal'
+import { FilterExpensesData } from './AllExpensesSlice'
 // import { addExpense } from '../HomeScreen/HomeSclice';
+import moment from "moment";
+
 
 
 const AllExpenses = ({navigation}) => {
@@ -21,12 +24,26 @@ const AllExpenses = ({navigation}) => {
   const [modalView,setModalView] = useState(false);
   const [modalEdit,setModalEdit] = useState(false);
   const [id,setId] = useState();
-  const [expenseAllData,setExpenseAllData] = useState([]);
+  const [today,setToday] = useState([]);
+  const [yesterday,setYesterday] = useState([]);
   const dispatch = useDispatch();
 
   const getAllExpenses = async () => {
-      const result = await dispatch(GetExpenseData());
-      setExpenseAllData(result?.payload?.expenses);
+      // const result = await dispatch(GetExpenseData());
+      // setExpenseAllData(result?.payload?.expenses);
+      // const date = ;
+      // const yesterday = ;
+      // console.log("yesterday",yesterday);
+      // console.log("date",date);
+      // const postData = {date:yesterday}
+      const Today = await dispatch(FilterExpensesData(
+        {date :moment(new Date()).format("YYYY-MM-DD")}
+      ));
+      const yesterday = await dispatch(FilterExpensesData(
+        {date :moment(new Date()).subtract(1, 'day').format("YYYY-MM-DD")}
+      ));
+      setToday(Today?.payload?.expenses);
+      setYesterday(yesterday?.payload?.expenses);
   }
 
   useEffect(() => {
@@ -34,7 +51,7 @@ const AllExpenses = ({navigation}) => {
     getAllExpenses();
   },[])
  
-  const total = expenseAllData?.map((data) => data?.spend_amount).reduce((all, a) => all + a, 0);
+  const total = today?.map((data) => data?.spend_amount).reduce((all, a) => all + a, 0);
 
   const handleDelete = async (id) =>{
     setModalView(true);
@@ -69,7 +86,29 @@ const AllExpenses = ({navigation}) => {
           <Text style={GlobalStyles.customButtonText}> add one more</Text>
         </TouchableOpacity>
         <ScrollView style={{}} showsVerticalScrollIndicator={false}>
-        {expenseAllData?.map((expenses,index) =>(
+        {today.length !== 0 && 
+        <Text style={styles.DayWise}>Today {moment(new Date()).format("YYYY-MM-DD")}</Text>}
+        {today?.map((expenses,index) =>(
+          <View style={styles.expensesList} key={index}>
+            <Text style={styles.allExpenses}>{expenses?.spend_for}</Text>
+            <View style={styles.allMoneyBox}>
+              <Text style={styles.allMoney}>{expenses?.spend_amount}₹</Text>
+              <View style={styles.deleteBox}>
+                <TouchableOpacity style={styles.editIcon} onPress={() => hadleEdit(expenses?._id)}>
+                  {Icon("Feather", "edit", 25, "#609CE1")}
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => handleDelete(expenses?._id)}>
+                  {Icon("AntDesign", "delete", 25, "#ff0000")}
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        ))}
+
+        {yesterday.length !== 0 && 
+        <Text style={styles.DayWise}>Yesterday {moment(new Date()).subtract(1, 'day').format("YYYY-MM-DD")}</Text>}
+
+        {yesterday?.map((expenses,index) =>(
           <View style={styles.expensesList} key={index}>
             <Text style={styles.allExpenses}>{expenses?.spend_for}</Text>
             <View style={styles.allMoneyBox}>

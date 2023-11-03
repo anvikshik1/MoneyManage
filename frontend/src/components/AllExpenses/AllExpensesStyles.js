@@ -10,6 +10,12 @@ export const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'center',
     },
+    DayWise:{
+        color:'#091D34',
+        fontSize:22,
+        marginTop:12,
+        fontFamily:'DotsAllForNow',
+    },
     header:{
         alignItems:'center',
         justifyContent:'space-between',
